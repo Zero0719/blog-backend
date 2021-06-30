@@ -43,3 +43,11 @@ func UnValidate(c *gin.Context, errors map[string]string) {
 		map[string]interface{}{"errors": errors},
 	})
 }
+
+func UnAuthorized(c *gin.Context, msg string) {
+	c.JSON(http.StatusUnauthorized, &ResponseStruct{
+		0,
+		msg,
+		[]interface{}{},
+	})
+}

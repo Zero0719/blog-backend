@@ -6,8 +6,8 @@
 
 |功能|是否已完成|
 |:---:|:---:|
-|用户注册|![](public/assets/img/false.png)|
-|用户登录|![](public/assets/img/false.png)|
+|用户注册|![](public/assets/img/success.png)|
+|用户登录|![](public/assets/img/success.png)|
 |用户关注/取关|![](public/assets/img/false.png)|
 |文章发布|![](public/assets/img/false.png)|
 |文章列表|![](public/assets/img/false.png)|
