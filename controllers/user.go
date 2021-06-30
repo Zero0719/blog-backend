@@ -44,7 +44,7 @@ func UserRegister(c *gin.Context) {
 		response.Error(c, err.Error())
 		return
 	}
-
+	// todo 用户注册完成以后需要直接返回jwt
 	data := map[string]interface{}{"user": user}
 
 	response.Success(c, "注册成功", data)

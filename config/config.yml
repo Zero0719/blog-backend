@@ -1,0 +1,12 @@
+# config.yml
+port: 8000
+key: gsd898921h&TGFuis9G&gs
+jwt: sdfiohoi&*9809dfhu%hio
+
+database:
+  type: mysql
+  host: 127.0.0.1
+  port: 3306
+  dbname: goblog
+  user: root
+  password: root

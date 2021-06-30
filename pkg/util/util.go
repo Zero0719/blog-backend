@@ -1,13 +1,14 @@
 package util
 
 import (
+	"blog-backend/config"
 	"crypto/md5"
 	"fmt"
 	"io"
 )
 
 func EncryptPassword(password string) string {
-	return Md5(password + "123456")
+	return Md5(password + config.Conf.Key)
 }
 
 func Md5(str string) string {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"blog-backend/config"
 	"blog-backend/models"
 	"blog-backend/routers"
 	"context"
@@ -8,14 +9,16 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"time"
 )
 
 func main() {
+	config.SetUp()
 	router := routers.SetUp()
 	models.SetUp() // 启动数据库连接
 	srv := &http.Server{
-		Addr:    ":8000",
+		Addr:    ":" + strconv.Itoa(config.Conf.Port),
 		Handler: router,
 	}
 
