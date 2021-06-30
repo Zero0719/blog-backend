@@ -1,23 +1,19 @@
 package main
 
 import (
+	"blog-backend/models"
+	"blog-backend/routers"
 	"context"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
-
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	router := gin.Default()
-	router.GET("/", func(c *gin.Context) {
-		time.Sleep(5 * time.Second)
-		c.String(http.StatusOK, "Welcome Gin Server")
-	})
-
+	router := routers.SetUp()
+	models.SetUp() // 启动数据库连接
 	srv := &http.Server{
 		Addr:    ":8000",
 		Handler: router,

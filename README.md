@@ -1,6 +1,6 @@
 # Blog-Backend
 
-用 `golang` 开发的博客系统，该项目主要提供后端接口
+`golang` 开发的博客系统，该项目主要提供后端接口
 
 ## Feature
 
