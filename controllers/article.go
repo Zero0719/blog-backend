@@ -114,3 +114,33 @@ func ArticleDestroy(c *gin.Context) {
 
 	response.Success(c, "删除成功", "")
 }
+
+func ArticleShow(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.Error(c, err.Error())
+		return
+	}
+
+	var article models.Article
+	article.GetById(id)
+
+	if article.ID <= 0 {
+		response.NotFound(c, "文章不存在")
+		return
+	}
+
+	var transformArticle models.TransformArticle
+	transformArticle.ID = article.ID
+	transformArticle.Title = article.Title
+	transformArticle.Content = article.Content
+	transformArticle.CreatedAt = time.Unix(article.CreatedAt, 0).Format("2006-01-02 15:04:05")
+	transformArticle.UpdatedAt = time.Unix(article.UpdatedAt, 0).Format("2006-01-02 15:04:05")
+	authorMap := make(map[string]interface{})
+	authorMap["id"] = article.User.ID
+	authorMap["username"] = article.User.Username
+	transformArticle.Author = authorMap
+	data := make(map[string]interface{})
+	data["article"] = transformArticle
+	response.Success(c, "获取成功", data)
+}
