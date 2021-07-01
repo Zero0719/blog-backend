@@ -22,6 +22,7 @@ func SetUp() *gin.Engine {
 	auth.Use(middlewares.Auth())
 	auth.POST("/follow/:id", controllers.UserFollow) // 关注
 	auth.POST("/unfollow/:id", controllers.UserUnFollow) // 取关
+	auth.POST("/articles", controllers.ArticleStore) // 发布文章
 
 	return router
 }
