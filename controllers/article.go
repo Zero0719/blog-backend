@@ -84,3 +84,33 @@ func ArticleUpdate(c *gin.Context) {
 	data["id"] = article.ID
 	response.Success(c, "修改成功", data)
 }
+
+func ArticleDestroy(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		response.Error(c, err.Error())
+		return
+	}
+
+	var article models.Article
+	article.GetById(id)
+	if article.ID <= 0 {
+		response.NotFound(c, "文章不存在")
+		return
+	}
+
+	userId := c.GetInt("UserId")
+
+	if int(article.UserId) != userId {
+		response.Forbidden(c, "权限不足")
+		return
+	}
+
+	if err := article.Destroy(); err != nil {
+		response.Error(c, "删除失败")
+		return
+	}
+
+	response.Success(c, "删除成功", "")
+}

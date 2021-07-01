@@ -10,8 +10,7 @@ type Article struct {
 }
 
 func (article *Article) Store() error {
-	result := db.Create(&article)
-	return result.Error
+	return db.Create(&article).Error
 }
 
 func (article *Article) GetById(id int) {
@@ -19,6 +18,9 @@ func (article *Article) GetById(id int) {
 }
 
 func (article *Article) Update() error {
-	result := db.Save(&article)
-	return result.Error
+	return db.Save(&article).Error
+}
+
+func (article *Article) Destroy() error {
+	return db.Delete(&article).Error
 }
