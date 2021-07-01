@@ -6,6 +6,7 @@ import (
 	"blog-backend/pkg/response"
 	"blog-backend/pkg/util"
 	"blog-backend/pkg/validate"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -105,4 +106,24 @@ func UserLogin(c *gin.Context) {
 	data["token"] = token
 
 	response.Success(c, "登录成功", data)
+}
+
+func UserShow(c *gin.Context) {
+	id := c.Param("id")
+	var user models.User
+	paramId, _ := strconv.Atoi(id)
+	user.GetById(paramId)
+	if user.ID <= 0 {
+		response.NotFound(c, "用户不存在")
+		return
+	}
+
+	data := make(map[string]interface{})
+
+	var transformUser models.TransformUser
+	transformUser.ID = user.ID
+	transformUser.Username = user.Username
+
+	data["user"] = transformUser
+	response.Success(c, "请求成功", data)
 }

@@ -51,3 +51,11 @@ func UnAuthorized(c *gin.Context, msg string) {
 		[]interface{}{},
 	})
 }
+
+func NotFound(c *gin.Context, msg string) {
+	c.JSON(http.StatusNotFound, &ResponseStruct{
+		0,
+		msg,
+		[]interface{}{},
+	})
+}
