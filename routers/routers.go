@@ -2,6 +2,7 @@ package routers
 
 import (
 	"blog-backend/controllers"
+	"blog-backend/middlewares"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,7 +16,12 @@ func SetUp() *gin.Engine {
 	router.POST("/auth", controllers.UserLogin)    // 用户登录
 
 	router.GET("/users/:id", controllers.UserShow) // 单个用户信息
-	//router.POST("/follow/:id", controllers.UserFollow) // 关注
+
+	// 需要登录验证权限的路由
+	auth := router.Group("")
+	auth.Use(middlewares.Auth())
+	auth.POST("/follow/:id", controllers.UserFollow) // 关注
+	auth.POST("/unfollow/:id", controllers.UserUnFollow) // 取关
 
 	return router
 }

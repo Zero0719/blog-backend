@@ -123,7 +123,70 @@ func UserShow(c *gin.Context) {
 	var transformUser models.TransformUser
 	transformUser.ID = user.ID
 	transformUser.Username = user.Username
-
 	data["user"] = transformUser
 	response.Success(c, "请求成功", data)
+}
+
+func UserFollow(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		response.Error(c, err.Error())
+		return
+	}
+
+	userId := c.GetInt("UserId")
+	if userId <= 0 {
+		response.UnAuthorized(c, "用户未登录")
+		return
+	}
+
+	if id == userId {
+		response.Forbidden(c, "不允许对自己操作")
+		return
+	}
+
+	var uf models.UserFollowers
+
+	if uf.IsFollow(userId, id) {
+		response.Forbidden(c, "已关注该用户")
+		return
+	}
+
+	if !uf.Follow(userId, id) {
+		response.Error(c, "关注失败")
+		return
+	}
+
+	response.Success(c, "关注成功", "")
+}
+
+func UserUnFollow(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		response.Error(c, err.Error())
+		return
+	}
+
+	userId := c.GetInt("UserId")
+
+	if userId == id {
+		response.Forbidden(c, "不允许对自己操作")
+		return
+	}
+
+	var uf models.UserFollowers
+
+	if !uf.IsFollow(userId, id) {
+		response.Forbidden(c, "未关注该用户")
+		return
+	}
+
+	if !uf.UnFollow(userId, id) {
+		response.Error(c, "取关失败")
+		return
+	}
+
+	response.Success(c, "取关成功", "")
 }
