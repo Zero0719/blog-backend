@@ -17,6 +17,7 @@ func SetUp() *gin.Engine {
 
 	router.GET("/users/:id", controllers.UserShow) // 单个用户信息
 	router.GET("/articles/:id", controllers.ArticleShow) // 单片文章信息
+	router.GET("/articles", controllers.ArticleIndex) // 文章列表
 
 	// 需要登录验证权限的路由
 	auth := router.Group("")

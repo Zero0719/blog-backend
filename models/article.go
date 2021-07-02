@@ -34,3 +34,15 @@ func (article *Article) Update() error {
 func (article *Article) Destroy() error {
 	return db.Delete(&article).Error
 }
+
+func (article Article) GetList(page, size int, where interface{}) []Article {
+	var list []Article
+	db.Preload("User").Where(where).Limit(size).Offset((page - 1) * size).Order("id desc").Find(&list)
+	return list
+}
+
+func (article Article) Count(where interface{}) int {
+	var count int
+	db.Model(&Article{}).Where(where).Count(&count)
+	return count
+}

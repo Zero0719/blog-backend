@@ -1,12 +1,14 @@
 package controllers
 
 import (
+	"blog-backend/config"
 	"blog-backend/models"
 	"blog-backend/pkg/response"
 	"blog-backend/pkg/validate"
 	"strconv"
 	"time"
 
+	"github.com/Zero0719/go-function/date"
 	"github.com/gin-gonic/gin"
 )
 
@@ -134,8 +136,8 @@ func ArticleShow(c *gin.Context) {
 	transformArticle.ID = article.ID
 	transformArticle.Title = article.Title
 	transformArticle.Content = article.Content
-	transformArticle.CreatedAt = time.Unix(article.CreatedAt, 0).Format("2006-01-02 15:04:05")
-	transformArticle.UpdatedAt = time.Unix(article.UpdatedAt, 0).Format("2006-01-02 15:04:05")
+	transformArticle.CreatedAt = date.Date("2006-01-02 15:04:05", article.CreatedAt)
+	transformArticle.UpdatedAt = date.Date("2006-01-02 15:04:05", article.UpdatedAt)
 	authorMap := make(map[string]interface{})
 	authorMap["id"] = article.User.ID
 	authorMap["username"] = article.User.Username
@@ -143,4 +145,57 @@ func ArticleShow(c *gin.Context) {
 	data := make(map[string]interface{})
 	data["article"] = transformArticle
 	response.Success(c, "获取成功", data)
+}
+
+type ArticleQuery struct {
+	Page   int `form:"page"`
+	Size   int `form:"size"`
+	UserId int `form:"user_id"`
+}
+
+func ArticleIndex(c *gin.Context) {
+	var query ArticleQuery
+	if err := c.ShouldBindQuery(&query); err != nil {
+		response.Error(c, err.Error())
+		return
+	}
+
+	if query.Page == 0 {
+		query.Page = 1
+	}
+
+	if query.Size == 0 {
+		query.Size = config.Conf.PageLimit
+	}
+
+	where := make(map[string]interface{})
+
+	if query.UserId > 0 {
+		where["user_id"] = query.UserId
+	}
+
+	var article models.Article
+	articles := article.GetList(query.Page, query.Size, where)
+	count := article.Count(where)
+
+	var transformArticle models.TransformArticle
+	var transformArticles []models.TransformArticle
+	authorMap := make(map[string]interface{})
+	for _, item := range articles {
+		transformArticle.ID = item.ID
+		transformArticle.Title = item.Title
+		transformArticle.Content = item.Content
+		transformArticle.CreatedAt = date.Date("2006-01-02 15:03:04", item.CreatedAt)
+		transformArticle.UpdatedAt = date.Date("2006-01-02 15:03:04", item.UpdatedAt)
+		authorMap["id"] = item.User.ID
+		authorMap["username"] = item.User.Username
+		transformArticle.Author = authorMap
+		transformArticles = append(transformArticles, transformArticle)
+	}
+
+	data := make(map[string]interface{})
+	data["list"] = transformArticles
+	data["count"] = count
+
+	response.Success(c, "success", data)
 }

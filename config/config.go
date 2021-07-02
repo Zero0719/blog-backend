@@ -7,11 +7,12 @@ import (
 )
 
 type Config struct {
-	Port     int      `mapstructure:"port"`
-	Jwt      string   `mapstructure:"jwt"`
-	Key      string   `mapstructure:"key"`
-	Expired  int      `mapstructure:"expired"`
-	Database Database `mapstructure:"database"`
+	Port      int      `mapstructure:"port"`
+	Jwt       string   `mapstructure:"jwt"`
+	Key       string   `mapstructure:"key"`
+	Expired   int      `mapstructure:"expired"`
+	Database  Database `mapstructure:"database"`
+	PageLimit int      `mapstructure:"pageLimit"`
 }
 
 type Database struct {

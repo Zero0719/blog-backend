@@ -3,6 +3,7 @@ port: 8000
 key: gsd898921h&TGFuis9G&gs
 jwt: sdfiohoi&*9809dfhu%hio
 expired: 864000
+pageLimit: 10
 
 database:
   type: mysql
