@@ -3,7 +3,7 @@ module blog-backend
 go 1.16
 
 require (
-	github.com/Zero0719/go-function v0.1.0 // indirect
+	github.com/Zero0719/go-function v0.1.1 // indirect
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-playground/locales v0.13.0
 	github.com/go-playground/universal-translator v0.17.0

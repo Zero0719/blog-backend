@@ -11,8 +11,8 @@
 |用户信息|![](public/assets/img/success.png)|
 |用户关注/取关|![](public/assets/img/success.png)|
 |文章增删改查|![](public/assets/img/success.png)|
-|文章列表/搜索|![](public/assets/img/false.png)|
-|文章评论|![](public/assets/img/false.png)|
+|文章列表/搜索|![](public/assets/img/success.png)|
+|发布评论/评论删除/评论列表|![](public/assets/img/success.png)|
 |文章点赞|![](public/assets/img/false.png)|
 |图片上传|![](public/assets/img/false.png)|
 

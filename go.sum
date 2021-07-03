@@ -44,6 +44,8 @@ github.com/Zero0719/go-function v0.0.0-20210702054518-dc8cc0ae3d1f h1:iFDy6iij7e
 github.com/Zero0719/go-function v0.0.0-20210702054518-dc8cc0ae3d1f/go.mod h1:9cNarYNCZwvXsu/57vOVQ343wGTWgx9cAEP23S13Co0=
 github.com/Zero0719/go-function v0.1.0 h1:Gpnm9CuTeoO9X7vbbkTZMRlG30dIzLt9PbJo3moy4NE=
 github.com/Zero0719/go-function v0.1.0/go.mod h1:9cNarYNCZwvXsu/57vOVQ343wGTWgx9cAEP23S13Co0=
+github.com/Zero0719/go-function v0.1.1 h1:MOZJWXTfCsXy/N+j5v+mCZCXr1Mv/dciMMXxuHR/iJY=
+github.com/Zero0719/go-function v0.1.1/go.mod h1:9cNarYNCZwvXsu/57vOVQ343wGTWgx9cAEP23S13Co0=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/armon/circbuf v0.0.0-20150827004946-bbbad097214e/go.mod h1:3U/XgcO3hCbHZ8TKRvWD2dDTCfh9M9ya+I9JpbB7O8o=
